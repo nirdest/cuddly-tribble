@@ -12,12 +12,14 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      output1: ${{ steps.git_info.outputs.version }}
     steps:
       - uses: actions/checkout@v2
 
       - id: git_info
         run: |
-          echo ::set-output name=version::${GITHUB_REF#refs/tags/freeswitch-}
+          echo "version=${GITHUB_REF#refs/tags/freeswitch-} >> $GITHUB_OUTPUT
       - id: git_info2
         run: |
           echo ::set-output name=version::${whoan/docker-build-with-cache-action#refs/tags/v5.11.}
