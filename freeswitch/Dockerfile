@@ -1,7 +1,7 @@
 FROM debian:bullseye-slim
 
 ARG FREESWITCH_VERSION=1.10.7
-#ENV TOKEN=$API_KEY_FROM_SIGNALWIRE
+ARG TOKEN
 ARG LOGIN=signalwire
 
 RUN echo $TOKEN | wc -m
