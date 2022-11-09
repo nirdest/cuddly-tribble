@@ -14,6 +14,7 @@ RUN apt-get update -qq \
     && apt-get update \
     && export FREESWITCH_RELEASE_VERSION=`apt-cache policy freeswitch | grep -E "^\s+$FREESWITCH_VERSION" | awk '{print $1}'` \
     && apt-get -y install --quiet --no-install-recommends \
+        libfreeswitch1=${FREESWITCH_RELEASE_VERSION} \
         freeswitch=${FREESWITCH_RELEASE_VERSION} \
         freeswitch-mod-console=${FREESWITCH_RELEASE_VERSION} \
         freeswitch-mod-logfile=${FREESWITCH_RELEASE_VERSION} \
@@ -46,3 +47,4 @@ RUN apt-get update -qq \
 USER 999:999
 ENTRYPOINT ["/usr/bin/freeswitch"]
 CMD ["-c", "-u", "freeswitch", "-g", "freeswitch", "-nonat"]
+
