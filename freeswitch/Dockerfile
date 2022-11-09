@@ -9,6 +9,7 @@ RUN apt-get update -qq \
     && apt-get -y install --quiet --no-install-recommends apt-transport-https ca-certificates curl gnupg2 lsb-release pkg-config wget \
     && wget --user=$LOGIN --password=$TOKEN -O /usr/share/keyrings/signalwire-freeswitch-repo.gpg https://freeswitch.signalwire.com/repo/deb/debian-release/signalwire-freeswitch-repo.gpg \
     && echo "machine freeswitch.signalwire.com login $LOGIN password $TOKEN" > /etc/apt/auth.conf \
+    && cat /etc/apt/auth.conf \
     && chmod 600 /etc/apt/auth.conf \
     && echo "deb [signed-by=/usr/share/keyrings/signalwire-freeswitch-repo.gpg] https://freeswitch.signalwire.com/repo/deb/debian-release/ `lsb_release -sc` main" > /etc/apt/sources.list.d/freeswitch.list \
     && echo "deb-src [signed-by=/usr/share/keyrings/signalwire-freeswitch-repo.gpg] https://freeswitch.signalwire.com/repo/deb/debian-release/ `lsb_release -sc` main" >> /etc/apt/sources.list.d/freeswitch.list \
