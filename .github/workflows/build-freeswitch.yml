@@ -31,9 +31,9 @@ jobs:
 
       - uses: whoan/docker-build-with-cache-action@v5
         with:
-          registry: google.com
-          username: user
-          password: pass
+          registry: ${{ secrets.REGISTRY_HOST }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
           image_name: tools/${{ env.IMAGE_NAME }}
           context: ./freeswitch
           image_tag: ${{ steps.git_info.outputs.version }}
