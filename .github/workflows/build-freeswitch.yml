@@ -39,5 +39,6 @@ jobs:
           image_name: tools/${{ env.IMAGE_NAME }}
           context: ./freeswitch
           image_tag: ${{ steps.git_info.outputs.version }}
-          build_extra_args:  --build-arg=API_KEY_FROM_SIGNALWIRE=${{secrets.FREESWITCH_REPO_ACCESS_TOKEN}} --build-arg=FREESWITCH_IMAGE_TAG=${{ steps.git_info.outputs.version }}
+         # build_extra_args:  --build-arg= --build-arg=FREESWITCH_IMAGE_TAG=${{ steps.git_info.outputs.version }}
+          build_extra_args: '{"--build-arg": "TOKEN=${{secrets.FREESWITCH_REPO_ACCESS_TOKEN}}"}'
           push_image_and_stages: false
