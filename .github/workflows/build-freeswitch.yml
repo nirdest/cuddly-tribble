@@ -7,7 +7,7 @@ on:
 
 env:
   IMAGE_NAME: freeswitch
-  API_KEY_FROM_SIGNALWIRE: ${{secrets.FREESWITCH_REPO_ACCESS_TOKEN}}
+ # API_KEY_FROM_SIGNALWIRE: ${{secrets.FREESWITCH_REPO_ACCESS_TOKEN}}
   
 jobs:
   build:
@@ -27,11 +27,9 @@ jobs:
       - run: echo ${{ steps.git_info.outputs.version }} 
       - run: echo ${{ steps.git_info2.outputs.version }} 
       - run: echo ${{secrets.FREESWITCH_REPO_ACCESS_TOKEN}} 
-      - run: echo $API_KEY_FROM_SIGNALWIRE | wc -m
+  #    - run: echo $API_KEY_FROM_SIGNALWIRE | wc -m
 
       - uses: whoan/docker-build-with-cache-action@v5
-        env: # Or as an environment variable
-          API_KEY_FROM_SIGNALWIRE: ${{secrets.FREESWITCH_REPO_ACCESS_TOKEN}}
         with:
           registry: ${{ secrets.REGISTRY_HOST }}
           username: ${{ secrets.REGISTRY_USERNAME }}
