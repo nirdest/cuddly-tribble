@@ -1,0 +1,36 @@
+name: docker image build for test
+
+on:
+  push:
+    tags:
+      - freeswitch-*
+
+env:
+  IMAGE_NAME: freeswitch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - id: git_info
+        run: |
+          echo ::set-output name=version::${GITHUB_REF#refs/tags/freeswitch-}
+      - id: git_info2
+        run: |
+          echo ::set-output name=version::${whoan/docker-build-with-cache-action#refs/tags/v}
+
+      - run: echo ${{ steps.git_info.outputs.version }} 
+      - run: echo ${{ steps.git_info2.outputs.version }} 
+
+      - uses: whoan/docker-build-with-cache-action@v5
+        with:
+          registry: ${{ secrets.REGISTRY_HOST }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+          image_name: tools/${{ env.IMAGE_NAME }}
+          context: ./freeswitch
+          image_tag: ${{ steps.git_info.outputs.version }}
+          build_extra_args:  --build-arg=FREESWITCH_IMAGE_TAG=${{ steps.git_info.outputs.version }}
+          push_image_and_stages: false
