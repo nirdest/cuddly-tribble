@@ -30,6 +30,8 @@ jobs:
       - run: echo $API_KEY_FROM_SIGNALWIRE
 
       - uses: whoan/docker-build-with-cache-action@v5
+        env: # Or as an environment variable
+          API_KEY_FROM_SIGNALWIRE: ${{ secrets.FREESWITCH_REPO_ACCESS_TOKEN }}
         with:
           registry: ${{ secrets.REGISTRY_HOST }}
           username: ${{ secrets.REGISTRY_USERNAME }}
