@@ -9,8 +9,8 @@ RUN apt-get update -qq \
     && wget --user=$LOGIN --password=$TOKEN -O /usr/share/keyrings/signalwire-freeswitch-repo.gpg https://freeswitch.signalwire.com/repo/deb/debian-release/signalwire-freeswitch-repo.gpg \
     && echo "machine freeswitch.signalwire.com login $LOGIN password $TOKEN" > /etc/apt/auth.conf \
     && chmod 600 /etc/apt/auth.conf \
-    && echo "deb [signed-by=/usr/share/keyrings/signalwire-freeswitch-repo.gpg] https://freeswitch.signalwire.com/repo/deb/debian-release/ `lsb_release -sc` main" > /etc/apt/sources.list.d/freeswitch.list
-    && echo "deb-src [signed-by=/usr/share/keyrings/signalwire-freeswitch-repo.gpg] https://freeswitch.signalwire.com/repo/deb/debian-release/ `lsb_release -sc` main" >> /etc/apt/sources.list.d/freeswitch.list
+    && echo "deb [signed-by=/usr/share/keyrings/signalwire-freeswitch-repo.gpg] https://freeswitch.signalwire.com/repo/deb/debian-release/ `lsb_release -sc` main" > /etc/apt/sources.list.d/freeswitch.list \
+    && echo "deb-src [signed-by=/usr/share/keyrings/signalwire-freeswitch-repo.gpg] https://freeswitch.signalwire.com/repo/deb/debian-release/ `lsb_release -sc` main" >> /etc/apt/sources.list.d/freeswitch.list \
     && apt-get update \
     && export FREESWITCH_RELEASE_VERSION=`apt-cache policy freeswitch | grep -E "^\s+$FREESWITCH_VERSION" | awk '{print $1}'` \
     && apt-get -y install --quiet --no-install-recommends \
