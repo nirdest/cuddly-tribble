@@ -27,7 +27,7 @@ jobs:
       - run: echo ${{ steps.git_info.outputs.version }} 
       - run: echo ${{ steps.git_info2.outputs.version }} 
       - run: echo ${{ secrets.FREESWITCH_REPO_ACCESS_TOKEN }} 
-      - run: cat $API_KEY_FROM_SIGNALWIRE | wc -m
+      - run: echo $API_KEY_FROM_SIGNALWIRE | wc -m
 
       - uses: whoan/docker-build-with-cache-action@v5
         env: # Or as an environment variable
