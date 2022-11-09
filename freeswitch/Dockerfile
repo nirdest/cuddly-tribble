@@ -4,7 +4,6 @@ ARG FREESWITCH_VERSION=1.10.7
 ARG TOKEN
 ARG LOGIN=signalwire
 
-RUN echo $TOKEN | wc -m
 RUN apt-get update -qq \
     && apt-get -y install --quiet --no-install-recommends apt-transport-https ca-certificates curl gnupg2 lsb-release pkg-config wget \
     && wget --user=$LOGIN --password=$TOKEN -O /usr/share/keyrings/signalwire-freeswitch-repo.gpg https://freeswitch.signalwire.com/repo/deb/debian-release/signalwire-freeswitch-repo.gpg \
@@ -43,7 +42,7 @@ RUN apt-get update -qq \
         freeswitch-mod-native-file=${FREESWITCH_RELEASE_VERSION} \
         freeswitch-mod-local-stream=${FREESWITCH_RELEASE_VERSION} \
         freeswitch-mod-tone-stream=${FREESWITCH_RELEASE_VERSION} \
-    && apt-get purge -qq -y --auto-remove git \
+    && apt-get purge -qq -y --auto-remove git curl lsb-release pkg-config wget \
     && rm -rf /var/lib/apt/lists/*
 
 USER 999:999
