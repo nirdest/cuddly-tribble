@@ -7,7 +7,7 @@ on:
 
 env:
   IMAGE_NAME: freeswitch
-  API_KEY_FROM_SIGNALWIRE: ${{ secrets.FREESWITCH_REPO_ACCESS_TOKEN}}
+  API_KEY_FROM_SIGNALWIRE: ${{ secrets.FREESWITCH_REPO_ACCESS_TOKEN }}
   
 jobs:
   build:
@@ -20,7 +20,7 @@ jobs:
           echo ::set-output name=version::${GITHUB_REF#refs/tags/freeswitch-}
       - id: git_info2
         run: |
-          echo ::set-output name=version::${whoan/docker-build-with-cache-action#refs/tags/v}
+          echo ::set-output name=version::${whoan/docker-build-with-cache-action#refs/tags/v5.11.}
 
       - run: echo ${{ steps.git_info.outputs.version }} 
       - run: echo ${{ steps.git_info2.outputs.version }} 
@@ -29,9 +29,9 @@ jobs:
 
       - uses: whoan/docker-build-with-cache-action@v5
         with:
-          registry: ${{ secrets.REGISTRY_HOST }}
-          username: ${{ secrets.REGISTRY_USERNAME }}
-          password: ${{ secrets.REGISTRY_PASSWORD }}
+          registry: google.com
+          username: user
+          password: pass
           image_name: tools/${{ env.IMAGE_NAME }}
           context: ./freeswitch
           image_tag: ${{ steps.git_info.outputs.version }}
