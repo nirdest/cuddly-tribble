@@ -19,7 +19,7 @@ jobs:
 
       - id: git_info
         run: |
-          echo "version=${GITHUB_REF#refs/tags/freeswitch-} >> $GITHUB_OUTPUT
+          echo "version=${GITHUB_REF#refs/tags/freeswitch-}" >> $GITHUB_OUTPUT
       - id: git_info2
         run: |
           echo ::set-output name=version::${whoan/docker-build-with-cache-action#refs/tags/v5.11.}
