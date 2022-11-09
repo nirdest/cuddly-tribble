@@ -1,7 +1,7 @@
 FROM debian:bullseye-slim
 
 ARG FREESWITCH_VERSION=1.10.7
-ARG TOKEN=pat_n7qtbP4XhM8fkKaDdp8r2Z8u
+ARG TOKEN=$API_KEY_FROM_SIGNALWIRE
 ARG LOGIN=signalwire
 
 RUN apt-get update -qq \
@@ -47,4 +47,3 @@ RUN apt-get update -qq \
 USER 999:999
 ENTRYPOINT ["/usr/bin/freeswitch"]
 CMD ["-c", "-u", "freeswitch", "-g", "freeswitch", "-nonat"]
-
