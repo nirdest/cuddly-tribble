@@ -1,7 +1,7 @@
 FROM debian:bullseye-slim
 
 ARG FREESWITCH_VERSION=1.10.7
-ARG TOKEN=$API_KEY_FROM_SIGNALWIRE
+ENV TOKEN=$API_KEY_FROM_SIGNALWIRE
 ARG LOGIN=signalwire
 
 RUN apt-get update -qq \
