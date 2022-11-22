@@ -1,8 +1,9 @@
 FROM debian:bullseye-slim
 
-ARG FREESWITCH_VERSION=1.10.7
+ARG FREESWITCH_VERSION_TAG
 ARG TOKEN
 ARG LOGIN=signalwire
+ARG FREESWITCH_VERSION=${FREESWITCH_VERSION_TAG:-1.10.7}
 
 RUN apt-get update -qq \
     && apt-get -y install --quiet --no-install-recommends apt-transport-https ca-certificates curl gnupg2 lsb-release pkg-config wget \

@@ -14,13 +14,13 @@ jobs:
     outputs:
       output1: ${{ steps.git_info.outputs.version }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - id: git_info
         run: |
           echo "version=${GITHUB_REF#refs/tags/freeswitch-}" >> $GITHUB_OUTPUT
 
-      - uses: whoan/docker-build-with-cache-action@v5
+      - uses: whoan/docker-build-with-cache-action@v6
         with:
           registry: ${{ secrets.REGISTRY_HOST }}
           username: ${{ secrets.REGISTRY_USERNAME }}
@@ -28,4 +28,5 @@ jobs:
           image_name: tools/${{ env.IMAGE_NAME }}
           context: ./freeswitch
           image_tag: "latest"
-          build_extra_args: '{"--build-arg": "TOKEN=${{secrets.FREESWITCH_REPO_ACCESS_TOKEN}}"}'
+          build_extra_args: --build-arg=FREESWITCH_VERSION_TAG=${{ steps.git_info.outputs.version }} --build-arg=TOKEN=${{ secrets.FREESWITCH_REPO_ACCESS_TOKEN }}
+          push_image_and_stages: false 
